@@ -22,6 +22,22 @@ class Round {
     this.currentCard = this.deck[0];
     return newTurn.giveFeedback();
   }
+
+  calculatePercentCorrect() {
+    if (this.incorrectGuesses.length === 0) {
+      return 100
+    } else if((this.incorrectGuesses.length / this.turns) === 1) {
+      return 0
+    } else {
+      return 100 - ((this.incorrectGuesses.length / this.turns) * 100)
+
+    }
+  }
+
+  endRound() {
+    const percent = this.calculatePercentCorrect();
+    return`**Round over!** You answered ${Math.ceil(percent)}% of the questions correctly!`
+  }
 }
 
 module.exports = Round;
