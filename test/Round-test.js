@@ -37,33 +37,34 @@ describe('Turn', function() {
     expect(newRound.turns).to.equal(0);
   });
 
-  it.skip('should be capable of taking turns', function() {
+  it('should be capable of taking turns', function() {
     const card1 = new Card(1, "What allows you to define a set of related information using key-value pairs?", ["object", "array", "function"], "object");
     const card2 = new Card(2, "What is a comma-separated list of related values?", ["array", "object", "function"], "array");
     const newDeck = new Deck([card1, card2]);
     const newRound = new Round(newDeck);
-    expect(newRound.takeTurns()).to.be.a('function');
+    newRound.takeTurn();
     expect(newRound.turns).to.equal(1);
   });
 
-  it.skip('should evaluate a guess, and record an incorrect guess', function() {
+  it('should evaluate a guess, and record an incorrect guess', function() {
     const card1 = new Card(1, "What allows you to define a set of related information using key-value pairs?", ["object", "array", "function"], "object");
     const card2 = new Card(2, "What is a comma-separated list of related values?", ["array", "object", "function"], "array");
     const newDeck = new Deck([card1, card2]);
     const newRound1 = new Round(newDeck);
-    const newRound2 = newRound(newDeck);
-    expect(newRound1.takeTurn('potato', card1)).to.equal('incorrect!');
-    expect(newRound1.incorrectGuesses).to.equal('potato');
-    expect(newRound2.takeTurn('object', card1)).to.equal('correct!');
+    const newRound2 = new Round(newDeck);
+    expect(newRound1.takeTurn('function')).to.equal('incorrect!');
+    expect(newRound1.incorrectGuesses).to.deep.equal([1]);
+    expect(newRound2.takeTurn('object')).to.equal('correct!');
+    expect(newRound2.incorrectGuesses).to.deep.equal([]);
   });
 
-  it.skip('should show new current card after taking a turn', function() {
+  it('should show new current card after taking a turn', function() {
     const card1 = new Card(1, "What allows you to define a set of related information using key-value pairs?", ["object", "array", "function"], "object");
     const card2 = new Card(2, "What is a comma-separated list of related values?", ["array", "object", "function"], "array");
     const newDeck = new Deck([card1, card2]);
     const newRound = new Round(newDeck);
-    expect(newRound.takeTurn()).to.equal('incorrect!');
-    expect(newRound.incorrectGuesses).to.equal(['potato']);
+    expect(newRound.takeTurn('function')).to.equal('incorrect!');
+    expect(newRound.incorrectGuesses).to.deep.equal([1]);
     expect(newRound.currentCard).to.equal(card2);
 
   });
