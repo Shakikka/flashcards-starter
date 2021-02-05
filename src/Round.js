@@ -10,23 +10,24 @@ class Round {
 
   returnCurrentCard() {
     return this.currentCard
-    }
+  }
 
   takeTurn(guess) {
-      this.turns += 1;
-      const newTurn = new Turn(guess, this.currentCard)
-      if(!newTurn.evaluateGuess()) {
-        this.incorrectGuesses.push(this.currentCard.id)
-      }
-      this.deck.shift()
-      this.currentCard = this.deck[0];
-      return newTurn.giveFeedback();
+    this.turns += 1;
+    const newTurn = new Turn(guess, this.currentCard)
+    if (!newTurn.evaluateGuess()) {
+      this.incorrectGuesses.push(this.currentCard.id)
     }
+
+    this.deck.shift()
+    this.currentCard = this.deck[0];
+    return newTurn.giveFeedback();
+  }
 
   calculatePercentCorrect() {
     if (this.incorrectGuesses.length === 0) {
       return 100
-    } else if((this.incorrectGuesses.length / this.turns) === 1) {
+    } else if ((this.incorrectGuesses.length / this.turns) === 1) {
       return 0
     } else {
       return 100 - ((this.incorrectGuesses.length / this.turns) * 100)
