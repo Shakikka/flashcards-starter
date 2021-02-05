@@ -10,18 +10,18 @@ class Round {
 
   returnCurrentCard() {
     return this.currentCard
-  }
+    }
 
   takeTurn(guess) {
-    this.turns += 1;
-    const newTurn = new Turn(guess, this.currentCard)
-    if(!newTurn.evaluateGuess()) {
-      this.incorrectGuesses.push(this.currentCard.id)
+      this.turns += 1;
+      const newTurn = new Turn(guess, this.currentCard)
+      if(!newTurn.evaluateGuess()) {
+        this.incorrectGuesses.push(this.currentCard.id)
+      }
+      this.deck.shift()
+      this.currentCard = this.deck[0];
+      return newTurn.giveFeedback();
     }
-    this.deck.shift()
-    this.currentCard = this.deck[0];
-    return newTurn.giveFeedback();
-  }
 
   calculatePercentCorrect() {
     if (this.incorrectGuesses.length === 0) {
@@ -36,7 +36,7 @@ class Round {
 
   endRound() {
     const percent = this.calculatePercentCorrect();
-    return`**Round over!** You answered ${Math.ceil(percent)}% of the questions correctly!`
+    console.log(`**Round over!** You answered ${Math.ceil(percent)}% of the questions correctly!`)
   }
 }
 
