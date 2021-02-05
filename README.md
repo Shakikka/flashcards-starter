@@ -15,7 +15,7 @@ initiated in the terminal, that asks questions about programming vocabulary.
 
 ## Install/Setup Instructions:
 
-<img src='./src/Untitled.gif>
+<img src='./src/Untitled.gif'>
 
 * Clone down this repo from GitHub in your terminal by using `git clone https://github.com/Shakikka/flashcards-starter`
 
